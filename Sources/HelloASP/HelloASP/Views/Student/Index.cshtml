@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index","Student",FormMethod.Get))
+{
+    <p>Find by name: @Html.TextBox("searchString",@ViewBag.currentSearch as string, new { @class = "form-control" })<input type="submit" value="Search"/></p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.nameSort })
+        </th>
+
+        <th>
+            Last Name
+        </th>
+
+        <th>
+            @Html.ActionLink("Grade", "Index", new { sortOrder = ViewBag.dateSort })
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @item.FisrtName
+        </td>
+
+        <td>
+            @item.LastName
+        </td>
+        <td>
+            @item.Grade
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.StudentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.StudentId })
+        </td>
+    </tr>
+    }
+
+
+</table>
