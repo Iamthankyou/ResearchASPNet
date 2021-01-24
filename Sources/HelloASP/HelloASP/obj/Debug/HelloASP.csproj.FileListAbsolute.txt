@@ -206,3 +206,7 @@ F:\ResearchASPNet\Sources\HelloASP\HelloASP\bin\System.Runtime.CompilerServices.
 F:\ResearchASPNet\Sources\HelloASP\HelloASP\bin\System.Text.Encodings.Web.xml
 F:\ResearchASPNet\Sources\HelloASP\HelloASP\bin\System.Threading.Tasks.Extensions.xml
 F:\ResearchASPNet\Sources\HelloASP\HelloASP\bin\ru-ru\JavaScriptEngineSwitcher.Core.resources.dll
+F:\ResearchASPNet\Sources\HelloASP\HelloASP\bin\PagedList.dll
+F:\ResearchASPNet\Sources\HelloASP\HelloASP\bin\PagedList.Mvc.dll
+F:\ResearchASPNet\Sources\HelloASP\HelloASP\bin\PagedList.xml
+F:\ResearchASPNet\Sources\HelloASP\HelloASP\bin\PagedList.Mvc.xml

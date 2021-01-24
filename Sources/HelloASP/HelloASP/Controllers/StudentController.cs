@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace HelloASP.Controllers
 {
@@ -16,7 +17,7 @@ namespace HelloASP.Controllers
         private Model1 db = new Model1();
 
         // GET: Student
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string searchString, int? page)
         {
             var students = from i in db.Students  select i;
 
@@ -46,8 +47,11 @@ namespace HelloASP.Controllers
                     students = students.OrderBy(s => s.FisrtName);
                     break;
             }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
             
-            return View(students.ToList());
+            return View(students.ToPagedList(pageNumber,pageSize));
         }
 
         public ActionResult Details(string id)
@@ -70,7 +74,15 @@ namespace HelloASP.Controllers
         // FOR GET
         public ActionResult Create()
         {
+            ViewBag.idGenerate = getId();
+
             return View();
+        }
+
+        private string getId()
+        {
+            string res = DateTime.Now.Day.ToString()+DateTime.Now.Month.ToString()+DateTime.Now.Minute.ToString()+DateTime.Now.Millisecond.ToString()+DateTime.Now.Hour.ToString();
+            return res;
         }
 
         [HttpPost]
