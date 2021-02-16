@@ -54,6 +54,36 @@ namespace HelloASP.Controllers
             return View(students.ToPagedList(pageNumber,pageSize));
         }
 
+        // Get
+        public ActionResult AddStudentCourse()
+        {
+            ViewBag.idGenerate = getId();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddStudentCourse([Bind(Include =("StudentCourseId,CourseId,StudentId"))] Student_Course studentCourse)
+        {
+            try
+            {
+                db.Student_Course.Add(studentCourse);
+                db.SaveChanges();
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Can't add link");
+            }
+
+            return View(studentCourse);
+        }
+
+        // Get
+        public ActionResult CreateCourse()
+        {
+            return View();
+        }
+
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -62,6 +92,13 @@ namespace HelloASP.Controllers
             }
 
             Student student = db.Students.Find(id);
+
+            ViewBag.tmp = student.Student_Course.ToList().Count ;
+
+            foreach(var i in student.Student_Course)
+            {
+                ViewBag.tmp = i.Course.Title.ToString();
+            }
 
             if (student == null)
             {
@@ -77,6 +114,23 @@ namespace HelloASP.Controllers
             ViewBag.idGenerate = getId();
 
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateCourse([Bind(Include=("CourseId,Title,Credit"))] Course course)
+        {
+            try
+            {
+                db.Courses.Add(course);
+                db.SaveChanges();
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Can't create course");
+            }
+
+            return View(course);
         }
 
         private string getId()

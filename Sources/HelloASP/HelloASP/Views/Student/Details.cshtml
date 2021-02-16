@@ -1,13 +1,30 @@
-﻿
+﻿    
 @{
     ViewBag.Title = "Details";
 }
 
+@model HelloASP.Models.Student
+
 <h2>Details</h2>
 
 <dt>
-    @Model.LastName
+    @Model.LastName <bold>@Model.FisrtName</bold>
 </dt>
+
+
 <dd>
-    @Model.FisrtName
+    <table class="table">
+        <tr>
+            <th>Course Title</th>
+            <th>Credit</th>
+        </tr>
+        @foreach (var i in Model.Student_Course)
+        {
+        <tr>
+            <td>@Html.DisplayFor(u => i.Course.Title)</td>
+            <td>@Html.DisplayFor(u => i.Course.Credit)</td>
+        </tr>
+        }
+    </table>
+    
 </dd>
