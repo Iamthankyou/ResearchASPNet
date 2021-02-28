@@ -4,8 +4,8 @@
 }
 
 <h2>AddStudentCourse</h2>
-
 @model HelloASP.Models.Student_Course
+
 
 @using (Html.BeginForm())
 {
@@ -18,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StudentCourseId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StudentCourseId, new { htmlAttributes = new {@Value=ViewBag.idGenerate, @class = "form-control" } })
+                @Html.EditorFor(model => model.StudentCourseId, new { htmlAttributes = new { @Value = ViewBag.idGenerate, @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.StudentCourseId, "", new { htmlAttributes = new { @class = "text-danger" } })
             </div>
         </div>
