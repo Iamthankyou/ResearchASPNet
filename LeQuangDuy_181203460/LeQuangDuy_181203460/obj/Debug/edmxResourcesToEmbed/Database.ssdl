@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLHangHoaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="HangHoa">
+    <Key>
+      <PropertyRef Name="MaHang" />
+    </Key>
+    <Property Name="MaHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaLoai" Type="int" Nullable="false" />
+    <Property Name="TenHang" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Gia" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Anh" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="LoaiHang">
+    <Key>
+      <PropertyRef Name="MaLoai" />
+    </Key>
+    <Property Name="MaLoai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenLoai" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblAccount">
+    <Key>
+      <PropertyRef Name="Uid" />
+    </Key>
+    <Property Name="Uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nchar" MaxLength="10" />
+    <Property Name="Password" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_HangHoa_LoaiHang">
+    <End Role="LoaiHang" Type="Self.LoaiHang" Multiplicity="1" />
+    <End Role="HangHoa" Type="Self.HangHoa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiHang">
+        <PropertyRef Name="MaLoai" />
+      </Principal>
+      <Dependent Role="HangHoa">
+        <PropertyRef Name="MaLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLHangHoaModelStoreContainer">
+    <EntitySet Name="HangHoa" EntityType="Self.HangHoa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoaiHang" EntityType="Self.LoaiHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAccount" EntityType="Self.tblAccount" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_HangHoa_LoaiHang" Association="Self.FK_HangHoa_LoaiHang">
+      <End Role="LoaiHang" EntitySet="LoaiHang" />
+      <End Role="HangHoa" EntitySet="HangHoa" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
